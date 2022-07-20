@@ -8,18 +8,16 @@
 import boto3
 import json
 
-def handler(event, context):
+def lambda_handler(event, context):
     body = json.loads(event["body"])
     # Do something with the body
 
     return {"statusCode": 200, "body": json.dumps({"message": "success"})}
 ```
 
-- The function must be named `handler(event, context)`
-
 ## Zip file
 
-- In this case, the Python file must be named `lambda_function.py`
+- In this case, the Python file must be named `lambda_function.py` and the function must be named `lambda_handler(event, context)`
 - You need to install packages locally, and bundle them into a zip
 - Install via: `python3 -m pip install --target ./package {package}`
 - Bundle them into a zip with `zip -r ./{bundle}.zip ./package`
@@ -28,6 +26,7 @@ def handler(event, context):
 ## Container
 
 - Create a dockerfile like:
+
 ```
 FROM public.ecr.aws/lambda/python:3.8
 
